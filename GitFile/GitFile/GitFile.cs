@@ -5,37 +5,35 @@ namespace GitFileNS
 {
     class GitFile
     {
-        public void FileWrite(FileStream f)
-        {
-            for (int i=1; i <=20; i++)
-            {
-                f.WriteByte((byte)i);
-            }
-        }
-
-        public void FileRead(FileStream f)
-        {
-            for (int i=0; i <=20; i++)
-            {
-                Console.Write(f.ReadByte() + "-> ");
-            }
-        }
-    }
-
-    class Test
-    {
         public static void Main(string[] args)
         {
-            FileStream f = new FileStream("test2.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            string[] names = new string[] { "Shelby Hegwood", "Bob Smith", "Canon Weathing", "Delta Kirby" };
 
-            GitFile gTest = new GitFile();
+            using (StreamWriter sw = new StreamWriter("C:/repos/Test/SampleNames.txt"))
+            {
+                foreach (string n in names)
+                {
+                    sw.WriteLine(n);
+                }
+            }
 
-            gTest.FileWrite(f);
-            f.Position = 0;
-            gTest.FileRead(f);
+            try
+            {
+                using (StreamReader sr = new StreamReader("C:/repos/Test/SampleNames.txt"))
+                {
+                    string line;
 
-            f.Close();
-
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        Console.WriteLine(line);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The file cannot be read:");
+                Console.WriteLine(e.Message);
+            }
             Console.ReadKey();
         }
     }
