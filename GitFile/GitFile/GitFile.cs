@@ -3,13 +3,15 @@ using System.IO;
 
 namespace GitFileNS
 {
+    /*
     class GitFile
     {
+        
         public static void Main(string[] args)
         {
             // create an instance of directory info
             DirectoryInfo di = new DirectoryInfo(@"C:/repos/Test");
-            Console.WriteLine("Here is {0}",di.FullName);
+            Console.WriteLine("Here is {0}", di.FullName);
 
             FileInfo[] fi = di.GetFiles();
             // show the file info under directory
@@ -114,7 +116,27 @@ namespace GitFileNS
                 return;
             }
             bsr.Close();
+            Console.ReadKey();
+        }
+    }
+    */
+    class MyAttribute
+    {
+        [Obsolete("Don't use NewMethod, use OldMethod instead", true)]
 
+        static void NewMethod()
+        {
+            Console.WriteLine("It is the new method");
+        }
+
+        static void OldMethod()
+        {
+            Console.WriteLine("It is the old method");
+        }
+        
+        public static void Main()
+        {
+            OldMethod();
             Console.ReadKey();
         }
     }
